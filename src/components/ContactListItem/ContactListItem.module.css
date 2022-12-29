@@ -1,0 +1,11 @@
+.button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+}
+.button:hover{
+    background-color: black;
+    color: red;
+}
