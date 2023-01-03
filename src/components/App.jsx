@@ -26,10 +26,6 @@ export class App extends Component {
       contacts: localUsers,
     });
   }
-  componentDidUpdate() {
-    // add all contacts to local storage
-    localStorage.setItem('localUsers', JSON.stringify(this.state.contacts));
-  }
   onFormSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
