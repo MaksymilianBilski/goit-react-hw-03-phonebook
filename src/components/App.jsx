@@ -16,14 +16,14 @@ export class App extends Component {
 
   componentDidMount() {
     if (
-      JSON.parse(localStorage.getItem('localUsers')) === undefined ||
-      JSON.parse(localStorage.getItem('localUsers')) === null
+      JSON.parse(localStorage.getItem('contacts')) === undefined ||
+      JSON.parse(localStorage.getItem('contacts')) === null
     ) {
       return;
     }
-    const localUsers = JSON.parse(localStorage.getItem('localUsers'));
+    const localUsers = JSON.parse(localStorage.getItem('contacts'));
     this.setState({
-      contacts: localUsers,
+      contacts: [...localUsers],
     });
   }
   onFormSubmit = e => {
@@ -48,11 +48,11 @@ export class App extends Component {
       id: nanoid(),
     };
     //add single contact to local storage
-    localStorage.setItem('localContact', JSON.stringify(contact));
-    const localContact = JSON.parse(localStorage.getItem('localContact'));
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, localContact],
-    }));
+    const newContacts = [...this.state.contacts, contact];
+    this.setState({
+      contacts: newContacts,
+    });
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     form.reset();
   };
 
@@ -61,6 +61,10 @@ export class App extends Component {
   };
 
   onContactDelete = id => {
+    const deletedContacts = [
+      this.state.contacts.filter(contact => contact.id !== id),
+    ];
+    localStorage.setItem('deletedContacts', JSON.stringify(deletedContacts));
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
