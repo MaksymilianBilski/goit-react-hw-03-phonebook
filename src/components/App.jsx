@@ -52,7 +52,7 @@ export class App extends Component {
     this.setState({
       contacts: newContacts,
     });
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    localStorage.setItem('contacts', JSON.stringify(newContacts));
     form.reset();
   };
 
